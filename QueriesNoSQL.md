@@ -147,7 +147,6 @@ db.Transacciones.aggregate([
 
 **Consulta MongoDB:**
 ```javascript
-
 db.Transacciones.aggregate([
   { 
     $match: { tipo_transaccion: "retiro" } 
@@ -171,6 +170,15 @@ db.Transacciones.aggregate([
       total_retiros: { $gt: 3 },
       monto_total: { $gt: 1000000 }
     }
+  },
+  {
+    $project: {
+      _id: 0,
+      num_cuenta: "$_id.num_cuenta",
+      total_retiros: 1,
+      monto_total: 1
+    }
   }
 ])
+
 ```
